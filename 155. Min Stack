@@ -1,0 +1,62 @@
+/*the first is mine*/
+class MinStack {
+private:
+    std::vector<int> data;
+    int MinIndex;
+public:
+    /** initialize your data structure here. */
+    MinStack() {   
+        this->MinIndex = 0;
+    } 
+    void push(int x) {
+        this->data.push_back(x);
+        (data[this->MinIndex]>x)? this->MinIndex = this->data.size() - 1 : this->MinIndex = this->MinIndex;   
+    }
+    void pop() {
+        if(this->data.empty())
+            return;
+        int min = this->data[0];
+        int pos = 0;
+        if (this->MinIndex == this->data.size() - 1){
+            for(int i = 1; i < this->data.size() - 1; i++){
+                if(min > data[i]){
+                    min = data[i];
+                    pos = i;
+                }
+            }
+            this->MinIndex = pos;
+        }
+        this->data.pop_back();
+    }
+    int top(){
+        if(!this->data.empty())
+            return this->data.back();
+    }   
+    int getMin() {
+        if (!this->data.empty()){
+            return this->data[MinIndex];
+        }   
+    }
+};
+
+
+class MinStack {
+private:
+    stack<int> s1;
+    stack<int> s2;
+public:
+    void push(int x) {
+	    s1.push(x);
+	    if (s2.empty() || x <= getMin())  s2.push(x);	    
+    }
+    void pop() {
+	    if (s1.top() == getMin())  s2.pop();
+	    s1.pop();
+    }
+    int top() {
+	    return s1.top();
+    }
+    int getMin() {
+	    return s2.top();
+    }
+};

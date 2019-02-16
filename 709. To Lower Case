@@ -1,0 +1,2 @@
+lowercase = capital_letter + 32; // 小写字母 = 大写字母 + 32 
+captital = lowercase - 32; // 大写字母 = 小写字母 - 32
